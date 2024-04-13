@@ -7,14 +7,11 @@ WORKDIR /app
 # Copiar solo el archivo pom.xml al directorio de trabajo del contenedor
 COPY pom.xml .
 
-# Descargar todas las dependencias de Maven (esto se hará solo si cambia el pom.xml)
-RUN mvn -B dependency:resolve dependency:resolve-plugins
-
 # Copiar el resto del código fuente al directorio de trabajo del contenedor
 COPY src ./src
 
 # Compilar la aplicación usando Maven
-RUN mvn -B package
+RUN mvn clean package -DskipTests
 
 # Segunda etapa del Dockerfile para la ejecución
 FROM maven:3.9.6-eclipse-temurin-17-focal
