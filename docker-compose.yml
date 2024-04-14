@@ -10,6 +10,8 @@ services:
       - 8080:8080
     depends_on:
       - java_db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://java_db:5432/postgres
   java_db:
     container_name: java_db
     image: postgres:latest
@@ -19,5 +21,3 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-
-
